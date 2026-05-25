@@ -5,6 +5,7 @@ import QuestionnaireView from '../views/QuestionnaireView.vue'
 import RecapView from '../views/RecapView.vue'
 import ResultView from '../views/ResultView.vue'
 import RecommendationsView from '../views/RecommendationsView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -15,6 +16,7 @@ const router = createRouter({
     { path: '/recapitulatif', name: 'recapitulatif', component: RecapView },
     { path: '/resultat', name: 'resultat', component: ResultView },
     { path: '/preconisations', name: 'preconisations', component: RecommendationsView },
+    { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFoundView },
   ],
   scrollBehavior() {
     return { top: 0 }
