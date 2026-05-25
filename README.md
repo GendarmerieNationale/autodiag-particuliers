@@ -2,6 +2,16 @@
 
 > Outil développé par **MHAILI Majda** — **CPTM 33 · Cellule de Prévention Technique de la Malveillance**
 
+## Application en ligne
+
+➡️ **<https://gendarmerienationale.github.io/autodiag-particuliers/>**
+
+<a href="https://gendarmerienationale.github.io/autodiag-particuliers/">
+  <img src="public/images/qr-code.png" alt="QR code — ouvrir l'auto-diagnostic" width="180" />
+</a>
+
+_Scannez le QR code pour ouvrir directement l'application sur mobile._
+
 ---
 
 ## Présentation
