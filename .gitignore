@@ -28,6 +28,9 @@ coverage
 
 .eslintcache
 
+# Local AI assistant settings (Claude Code)
+.claude/
+
 # Cypress
 /cypress/videos/
 /cypress/screenshots/
