@@ -1,0 +1,35 @@
+/* App-wide colour tokens.
+ * DSFR ships its own variables (--blue-france-*, etc.) but the design uses
+ * additional semantic colours (level / scoring) that need their own names.
+ * Keep this short — only the colours used in 3+ places belong here.
+ */
+
+:root {
+  /* Brand & surfaces */
+  --c-brand: #000091;
+  --c-brand-darker: #0b0b52;
+  --c-text-title: #161616;
+  --c-text-body: #555;
+  --c-text-muted: #888;
+
+  --c-bg-app: #f5f5fe;
+  --c-bg-card-blue: #f0f0ff;
+  --c-border-soft: #d0d0e0;
+  --c-border-softer: #e0e0f0;
+
+  /* Score / level — "excellent" */
+  --c-level-excellent: #1f8d49;
+  --c-level-excellent-dark: #1a5c33;
+  --c-level-excellent-bg: #e8f5e9;
+
+  /* Score / level — "moyen" */
+  --c-level-moyen: #b34000;
+
+  /* Score / level — "faible" */
+  --c-level-faible: #ce0500;
+  --c-level-faible-dark: #8d0000;
+  --c-level-faible-bg: #fce9e9;
+
+  /* Neutral chip ("sais_pas") */
+  --c-neutral-bg: #ededfd;
+}

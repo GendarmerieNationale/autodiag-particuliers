@@ -1,0 +1,44 @@
+[
+  {
+    "titre": "Comment vous protéger",
+    "icone": "ri-shield-check-line",
+    "contenu": [
+      "Vérifiez que votre porte d'entrée principale soit résistante à une effraction, qu'elle possède un système de fermeture fiable et un moyen de contrôle visuel (œilleton ou entrebâilleur).",
+      "Installez des équipements certifiés : volets ou barreaux, barre de sécurité sur les portes ou baies vitrées, éclairage à détecteur de présence en façade, système d'alarme anti-intrusion, visiophone, sonnette.",
+      "En cas d'intrusion, une remontée d'alarme doit pouvoir se réaliser sur votre portable ou vers un professionnel de télésurveillance. Avec un système de vidéosurveillance, une levée de doute peut se faire à distance.",
+      "Apposez de la signalétique sur vos portails et porte d'entrée pour indiquer la présence de caméras et alarme (effet dissuasif).",
+      "Fermez la porte d'entrée à double tour même lorsque vous êtes chez vous.",
+      "Si vous détenez des bijoux, objets de valeur ou du numéraire, placez-les dans un coffre-fort certifié, fixé au sol ou au mur, hors de vue, ou dans un coffre à la banque."
+    ]
+  },
+  {
+    "titre": "Bonnes pratiques en cas d'absence",
+    "icone": "ri-home-heart-line",
+    "contenu": [
+      "Ne laissez pas vos fenêtres ouvertes même pour une courte absence.",
+      "Ne cachez pas vos clefs ou un double à l'extérieur, même pour les laisser à un ami.",
+      "Ne laissez pas vos clefs de véhicule visibles dans votre logement, sur le contact ou cachées dans la boîte à gants.",
+      "Ne diffusez pas vos dates de vacances sur les réseaux sociaux ou votre messagerie.",
+      "Demandez à votre entourage de passer relever le courrier et de fermer la maison.",
+      "Si vous résidez en maison, veillez à verrouiller vos portails et portillons.",
+      "Inscrivez-vous au dispositif Opération Tranquillité Vacances (OTV) auprès de votre brigade de gendarmerie ou via l'application MaSécurité : https://www.masecurite.interieur.gouv.fr/fr/demarches-en-ligne/operation-tranquillite-vacances?hl=OTV"
+    ]
+  },
+  {
+    "titre": "Bon à savoir",
+    "icone": "ri-information-line",
+    "contenu": [
+      "Avant de passer à l'action, les cambrioleurs font souvent des repérages en se faisant passer pour des démarcheurs ou en testant votre réactivité en actionnant la sonnette ou visiophone.",
+      "Soyez attentif et n'hésitez pas à signaler tout comportement suspect, sans prendre de risque, en relevant si possible le véhicule (type, marque, couleur, immatriculation) ou les individus (nombre, tenue vestimentaire, signes particuliers)."
+    ]
+  },
+  {
+    "titre": "En cas de cambriolage : les bons réflexes",
+    "icone": "ri-alarm-warning-line",
+    "contenu": [
+      "Ne touchez à rien afin de préserver les traces et indices, et appelez le 17 immédiatement.",
+      "Une fois les constatations réalisées par les forces de l'ordre, faites un inventaire précis des objets volés ainsi que des dégâts occasionnés (description, photos, factures). Ces éléments vous seront demandés lors du dépôt de plainte et pourront faciliter la restitution de vos biens.",
+      "Déposez plainte en vous rendant à la brigade de gendarmerie ou en ligne via l'application MaSécurité : https://plainte-en-ligne.masecurite.interieur.gouv.fr/"
+    ]
+  }
+]

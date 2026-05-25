@@ -1,0 +1,324 @@
+[
+  {
+    "id": "ext_cloture",
+    "section": "Extérieurs",
+    "text": "Votre maison est-elle clôturée ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "ext_cloture_hauteur" },
+      "non": { "points": 0, "nextId": "ext_facade_voie" }
+    }
+  },
+  {
+    "id": "ext_cloture_hauteur",
+    "section": "Extérieurs",
+    "text": "Est-ce que la hauteur du portail et du portillon sont identiques à celle de la clôture ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "ext_cloture_verrou" },
+      "non": { "points": 0, "nextId": "ext_cloture_verrou" }
+    }
+  },
+  {
+    "id": "ext_cloture_verrou",
+    "section": "Extérieurs",
+    "text": "Ces ouvrants se verrouillent-ils électriquement ou manuellement (à l'aide d'une clef) ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "ext_cloture_ferme_absence" },
+      "non": { "points": 0, "nextId": "ext_facade_voie" }
+    }
+  },
+  {
+    "id": "ext_cloture_ferme_absence",
+    "section": "Extérieurs",
+    "text": "Fermez-vous vos ouvrants à clef lorsque vous quittez votre logement ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "ext_cloture_ferme_soir" },
+      "non": { "points": 0, "nextId": "ext_cloture_ferme_soir" }
+    }
+  },
+  {
+    "id": "ext_cloture_ferme_soir",
+    "section": "Extérieurs",
+    "text": "Fermez-vous vos ouvrants à clef lorsque vous rentrez le soir ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "ext_visiophone" },
+      "non": { "points": 0, "nextId": "ext_visiophone" }
+    }
+  },
+  {
+    "id": "ext_facade_voie",
+    "section": "Extérieurs",
+    "text": "Une ou plusieurs façades de votre habitation donnent-elles directement sur la voie publique ?",
+    "info": "Sans clôture, vos façades sont exposées directement. Des aménagements de sécurité sont recommandés.",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 0, "nextId": "ext_visiophone" },
+      "non": { "points": 1, "nextId": "ext_visiophone" }
+    }
+  },
+  {
+    "id": "ext_visiophone",
+    "section": "Extérieurs",
+    "text": "Avez-vous un visiophone ou une sonnette au niveau de votre portillon ou entrée de maison ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "ext_eclairage_detect" },
+      "non": { "points": 0, "nextId": "ext_eclairage_detect" }
+    }
+  },
+  {
+    "id": "ext_eclairage_detect",
+    "section": "Extérieurs",
+    "text": "Des éclairages à détection de mouvement sont-ils installés en façade ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "ext_cameras" },
+      "non": { "points": 0, "nextId": "ext_cameras" }
+    }
+  },
+  {
+    "id": "ext_cameras",
+    "section": "Extérieurs",
+    "text": "Avez-vous des caméras permettant de visualiser vos abords de maison ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "int_porte_a2p" },
+      "non": { "points": 0, "nextId": "int_porte_a2p" }
+    },
+    "sectionEnd": true
+  },
+  {
+    "id": "int_porte_a2p",
+    "section": "Façades & Intérieur",
+    "text": "Le niveau de résistance de votre porte d'entrée et sa serrure sont-ils certifiés anti-effraction (A2P/CR3 ou équivalent) ?",
+    "info": "La certification A2P ou CR3 garantit une résistance éprouvée à l'effraction. Vérifiez sur votre porte ou dans vos documents de garantie.",
+    "type": "yesno_sais_pas",
+    "options": {
+      "oui": { "points": 1, "nextId": "int_volets" },
+      "non": { "points": 0, "nextId": "int_volets" },
+      "sais_pas": { "points": 0, "nextId": "int_volets" }
+    }
+  },
+  {
+    "id": "int_volets",
+    "section": "Façades & Intérieur",
+    "text": "Vos fenêtres ou portes-fenêtres sont-elles équipées de volets (battants, roulants, persiennes, coulissants) ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "int_alarme" },
+      "non": { "points": 0, "nextId": "int_alarme" }
+    }
+  },
+  {
+    "id": "int_alarme",
+    "section": "Façades & Intérieur",
+    "text": "Avez-vous pensé à installer une alarme anti-intrusion ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "int_alarme_telesurveil" },
+      "non": { "points": 0, "nextId": "int_detect_ouvrant" }
+    }
+  },
+  {
+    "id": "int_alarme_telesurveil",
+    "section": "Façades & Intérieur",
+    "text": "L'alerte de votre alarme remonte-t-elle vers un opérateur de télésurveillance ou votre téléphone portable ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "int_detect_ouvrant" },
+      "non": { "points": 0, "nextId": "int_detect_ouvrant" }
+    }
+  },
+  {
+    "id": "int_detect_ouvrant",
+    "section": "Façades & Intérieur",
+    "text": "Avez-vous de la détection à l'ouverture (reliée à votre alarme) sur vos ouvrants non résistants à l'effraction ?",
+    "info": "Même sans volets ou porte certifiée, un détecteur d'ouverture couplé à l'alarme dissuade et alerte efficacement.",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "int_detect_volumetrique" },
+      "non": { "points": 0, "nextId": "int_detect_volumetrique" }
+    }
+  },
+  {
+    "id": "int_detect_volumetrique",
+    "section": "Façades & Intérieur",
+    "text": "Avez-vous des détecteurs volumétriques installés face à vos ouvrants ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_voisins" },
+      "non": { "points": 0, "nextId": "quotidien_voisins" }
+    },
+    "sectionEnd": true
+  },
+  {
+    "id": "quotidien_voisins",
+    "section": "Votre Quotidien",
+    "text": "Connaissez-vous vos voisins ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_vacances_rs" },
+      "non": { "points": 0, "nextId": "quotidien_vacances_rs" }
+    }
+  },
+  {
+    "id": "quotidien_vacances_rs",
+    "section": "Votre Quotidien",
+    "text": "Lors de vos vacances, communiquez-vous vos activités ou périodes d'absence sur les réseaux sociaux ?",
+    "info": "Partager vos dates de vacances en ligne peut signaler votre absence à des cambrioleurs potentiels.",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 0, "nextId": "quotidien_vacances_clef" },
+      "non": { "points": 1, "nextId": "quotidien_vacances_clef" }
+    }
+  },
+  {
+    "id": "quotidien_vacances_clef",
+    "section": "Votre Quotidien",
+    "text": "Lors de vos vacances, donnez-vous une clef à un voisin, un proche ou un ami pour vérifier votre logement ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_vacances_otv" },
+      "non": { "points": 0, "nextId": "quotidien_vacances_otv" }
+    }
+  },
+  {
+    "id": "quotidien_vacances_otv",
+    "section": "Votre Quotidien",
+    "text": "Avez-vous déjà demandé à votre brigade de gendarmerie le dispositif Opération Tranquillité Vacances (OTV) ?",
+    "info": "L'OTV permet à des patrouilles de gendarmerie d'effectuer des passages à votre domicile durant votre absence. Gratuit et très efficace.",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_outils" },
+      "non": { "points": 0, "nextId": "quotidien_outils" }
+    }
+  },
+  {
+    "id": "quotidien_outils",
+    "section": "Votre Quotidien",
+    "text": "Rangez-vous tous vos outils (échelle, outils de bricolage…) dans votre garage ou cabanon de jardin ?",
+    "info": "Une échelle ou un outil laissé dehors peut faciliter l'accès à une fenêtre ou une toiture.",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_travail_volets" },
+      "non": { "points": 0, "nextId": "quotidien_travail_volets" }
+    }
+  },
+  {
+    "id": "quotidien_travail_volets",
+    "section": "Votre Quotidien",
+    "text": "Lorsque vous partez au travail, fermez-vous tous vos volets ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_travail_clef" },
+      "non": { "points": 0, "nextId": "quotidien_travail_clef" }
+    }
+  },
+  {
+    "id": "quotidien_travail_clef",
+    "section": "Votre Quotidien",
+    "text": "Laissez-vous vos clefs dans un endroit accessible de l'extérieur (paillasson, pierre, boîte aux lettres…) ?",
+    "info": "Tout endroit accessible de l'extérieur est parmi les premières cachettes inspectées par un cambrioleur. Confiez plutôt vos clefs à un voisin de confiance.",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 0, "nextId": "quotidien_heures_volets" },
+      "non": { "points": 1, "nextId": "quotidien_heures_volets" }
+    }
+  },
+  {
+    "id": "quotidien_heures_volets",
+    "section": "Votre Quotidien",
+    "text": "Lorsque vous partez durant quelques heures, fermez-vous tous vos volets ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_garage" },
+      "non": { "points": 0, "nextId": "quotidien_garage" }
+    }
+  },
+  {
+    "id": "quotidien_garage",
+    "section": "Votre Quotidien",
+    "text": "Avez-vous un garage ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 0, "nextId": "quotidien_garage_stationnement" },
+      "non": { "points": 0, "nextId": "quotidien_vehicule_verrouille" }
+    }
+  },
+  {
+    "id": "quotidien_garage_stationnement",
+    "section": "Votre Quotidien",
+    "text": "Stationnez-vous votre véhicule à l'intérieur de votre garage ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_vehicule_verrouille" },
+      "non": { "points": 0, "nextId": "quotidien_vehicule_propriete" }
+    }
+  },
+  {
+    "id": "quotidien_vehicule_propriete",
+    "section": "Votre Quotidien",
+    "text": "Stationnez-vous votre véhicule sur votre propriété ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_vehicule_verrouille" },
+      "non": { "points": 0, "nextId": "quotidien_vehicule_verrouille" }
+    }
+  },
+  {
+    "id": "quotidien_vehicule_verrouille",
+    "section": "Votre Quotidien",
+    "text": "Votre véhicule est-il toujours verrouillé lorsqu'il est stationné dans votre garage ou sur votre propriété ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_objets_valeur" },
+      "non": { "points": 0, "nextId": "quotidien_vehicule_verrou_soir" }
+    }
+  },
+  {
+    "id": "quotidien_vehicule_verrou_soir",
+    "section": "Votre Quotidien",
+    "text": "Le soir, verrouillez-vous votre véhicule avant de vous coucher, même s'il est au garage ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_objets_valeur" },
+      "non": { "points": 0, "nextId": "quotidien_objets_valeur" }
+    }
+  },
+  {
+    "id": "quotidien_objets_valeur",
+    "section": "Votre Quotidien",
+    "text": "Le soir en rentrant, déposez-vous vos sacs, portefeuille ou clefs de voiture bien en vue près de la porte d'entrée ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 0, "nextId": "quotidien_objets_ranges" },
+      "non": { "points": 1, "nextId": "quotidien_objets_ranges" }
+    }
+  },
+  {
+    "id": "quotidien_objets_ranges",
+    "section": "Votre Quotidien",
+    "text": "Rangez-vous ces objets dans un tiroir ou hors de vue ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "quotidien_porte_nuit" },
+      "non": { "points": 0, "nextId": "quotidien_porte_nuit" }
+    }
+  },
+  {
+    "id": "quotidien_porte_nuit",
+    "section": "Votre Quotidien",
+    "text": "Fermez-vous votre porte d'entrée à clef le soir avant d'aller vous coucher ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": null },
+      "non": { "points": 0, "nextId": null }
+    },
+    "sectionEnd": true,
+    "isLast": true
+  }
+]

@@ -1,0 +1,270 @@
+[
+  {
+    "id": "imm_gardien",
+    "section": "Immeuble",
+    "text": "Y a-t-il un gardien ou un concierge dans votre immeuble ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "imm_residence_cloturee" },
+      "non": { "points": 0, "nextId": "imm_residence_cloturee" }
+    }
+  },
+  {
+    "id": "imm_residence_cloturee",
+    "section": "Immeuble",
+    "text": "Votre immeuble se trouve-t-il dans une résidence clôturée ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "acces_controle" },
+      "non": { "points": 0, "nextId": "imm_rdz_chaussee" }
+    }
+  },
+  {
+    "id": "imm_rdz_chaussee",
+    "section": "Immeuble",
+    "text": "Habitez-vous au rez-de-chaussée ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 0, "nextId": "imm_balcon_voie" },
+      "non": { "points": 1, "nextId": "acces_controle" }
+    }
+  },
+  {
+    "id": "imm_balcon_voie",
+    "section": "Immeuble",
+    "text": "Votre balcon ou fenêtre donne-t-il sur la voie publique ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 0, "nextId": "imm_volets_barreaux" },
+      "non": { "points": 1, "nextId": "acces_controle" }
+    }
+  },
+  {
+    "id": "imm_volets_barreaux",
+    "section": "Immeuble",
+    "text": "Vos fenêtres ou portes-fenêtres sont-elles équipées de volets ou de barreaux ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "imm_volets_travail" },
+      "non": { "points": 0, "nextId": "imm_detect_fenetre" }
+    }
+  },
+  {
+    "id": "imm_detect_fenetre",
+    "section": "Immeuble",
+    "text": "Avez-vous un dispositif de détection à l'ouverture sur vos fenêtres en cas d'intrusion ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "imm_volets_travail" },
+      "non": { "points": 0, "nextId": "imm_volets_travail" }
+    }
+  },
+  {
+    "id": "imm_volets_travail",
+    "section": "Immeuble",
+    "text": "Lorsque vous partez au travail, fermez-vous tous vos volets donnant sur la voie publique ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "acces_controle" },
+      "non": { "points": 0, "nextId": "acces_controle" }
+    },
+    "sectionEnd": true
+  },
+  {
+    "id": "acces_controle",
+    "section": "Accès à l'immeuble",
+    "text": "Avez-vous un contrôle d'accès (badge, pavé numérique) pour déverrouiller la porte d'entrée de l'immeuble ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "acces_interphone" },
+      "non": { "points": 0, "nextId": "acces_serrure_securisee" }
+    }
+  },
+  {
+    "id": "acces_serrure_securisee",
+    "section": "Accès à l'immeuble",
+    "text": "La porte d'entrée de l'immeuble est-elle équipée d'une serrure avec une clef sécurisée ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "acces_interphone" },
+      "non": { "points": 0, "nextId": "acces_interphone" }
+    }
+  },
+  {
+    "id": "acces_interphone",
+    "section": "Accès à l'immeuble",
+    "text": "Y a-t-il un interphone ou visiophone à la porte d'entrée permettant de déverrouiller depuis votre appartement ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "acces_cameras_hall" },
+      "non": { "points": 0, "nextId": "acces_cameras_hall" }
+    }
+  },
+  {
+    "id": "acces_cameras_hall",
+    "section": "Accès à l'immeuble",
+    "text": "Y a-t-il des caméras de surveillance dans le hall d'accès ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "log_porte_paliere" },
+      "non": { "points": 0, "nextId": "log_porte_paliere" }
+    },
+    "sectionEnd": true
+  },
+  {
+    "id": "log_porte_paliere",
+    "section": "Votre Logement",
+    "text": "Votre porte palière est-elle une porte anti-effraction 3 points ?",
+    "info": "Une porte 3 points verrouille simultanément en haut, au centre et en bas. Elle est bien plus résistante qu'une porte à serrure simple.",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "log_oeilleton" },
+      "non": { "points": 0, "nextId": "log_oeilleton" }
+    }
+  },
+  {
+    "id": "log_oeilleton",
+    "section": "Votre Logement",
+    "text": "Avez-vous un œilleton sur votre porte palière ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "log_sonnette" },
+      "non": { "points": 0, "nextId": "log_sonnette" }
+    }
+  },
+  {
+    "id": "log_sonnette",
+    "section": "Votre Logement",
+    "text": "Avez-vous une sonnette près de votre porte palière ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "log_alarme" },
+      "non": { "points": 0, "nextId": "log_alarme" }
+    }
+  },
+  {
+    "id": "log_alarme",
+    "section": "Votre Logement",
+    "text": "Avez-vous une alarme anti-intrusion dans votre appartement ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "log_alarme_detect_porte" },
+      "non": { "points": 0, "nextId": "log_parking" }
+    }
+  },
+  {
+    "id": "log_alarme_detect_porte",
+    "section": "Votre Logement",
+    "text": "Votre porte d'entrée est-elle équipée d'un détecteur à l'ouverture ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "log_detect_volumetrique" },
+      "non": { "points": 0, "nextId": "log_detect_volumetrique" }
+    }
+  },
+  {
+    "id": "log_detect_volumetrique",
+    "section": "Votre Logement",
+    "text": "Les détecteurs volumétriques sont-ils orientés vers votre porte d'entrée ou vos fenêtres ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "log_telesurveil" },
+      "non": { "points": 0, "nextId": "log_telesurveil" }
+    }
+  },
+  {
+    "id": "log_telesurveil",
+    "section": "Votre Logement",
+    "text": "L'alerte remonte-t-elle vers un opérateur de télésurveillance ou sur votre téléphone portable ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "log_parking" },
+      "non": { "points": 0, "nextId": "log_parking" }
+    }
+  },
+  {
+    "id": "log_parking",
+    "section": "Votre Logement",
+    "text": "Avez-vous un parking réservé à votre résidence ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "log_parking_cloture" },
+      "non": { "points": 0, "nextId": "log_parking_rue" }
+    }
+  },
+  {
+    "id": "log_parking_cloture",
+    "section": "Votre Logement",
+    "text": "Ce parking est-il clôturé ou souterrain ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "appt_vacances_rs" },
+      "non": { "points": 0, "nextId": "appt_vacances_rs" }
+    }
+  },
+  {
+    "id": "log_parking_rue",
+    "section": "Votre Logement",
+    "text": "Garez-vous votre véhicule sur la voie publique ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 0, "nextId": "appt_vacances_rs" },
+      "non": { "points": 1, "nextId": "appt_vacances_rs" }
+    },
+    "sectionEnd": true
+  },
+  {
+    "id": "appt_vacances_rs",
+    "section": "Votre Quotidien",
+    "text": "Lors de vos vacances, communiquez-vous vos activités ou absences sur les réseaux sociaux ?",
+    "info": "Partager vos dates de vacances en ligne peut signaler votre absence à des cambrioleurs.",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 0, "nextId": "appt_vacances_clef" },
+      "non": { "points": 1, "nextId": "appt_vacances_clef" }
+    }
+  },
+  {
+    "id": "appt_vacances_clef",
+    "section": "Votre Quotidien",
+    "text": "Donnez-vous une clef à un voisin, un proche ou un ami pour vérifier votre appartement lors de vos vacances ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "appt_vacances_clef_paillasson" },
+      "non": { "points": 0, "nextId": "appt_vacances_clef_paillasson" }
+    }
+  },
+  {
+    "id": "appt_vacances_clef_paillasson",
+    "section": "Votre Quotidien",
+    "text": "Laissez-vous vos clefs sous le paillasson ou dans une cachette pour vos vacances ?",
+    "info": "Cacher ses clefs sous le paillasson est l'une des premières cachettes inspectées par les cambrioleurs.",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 0, "nextId": "appt_vacances_volets" },
+      "non": { "points": 1, "nextId": "appt_vacances_volets" }
+    }
+  },
+  {
+    "id": "appt_vacances_volets",
+    "section": "Votre Quotidien",
+    "text": "Lorsque vous partez en vacances, fermez-vous tous vos volets ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 1, "nextId": "appt_heures_clef" },
+      "non": { "points": 0, "nextId": "appt_heures_clef" }
+    }
+  },
+  {
+    "id": "appt_heures_clef",
+    "section": "Votre Quotidien",
+    "text": "Lorsque vous partez quelques heures, laissez-vous vos clefs sous le paillasson ou une cachette ?",
+    "type": "yesno",
+    "options": {
+      "oui": { "points": 0, "nextId": null },
+      "non": { "points": 1, "nextId": null }
+    },
+    "sectionEnd": true,
+    "isLast": true
+  }
+]
