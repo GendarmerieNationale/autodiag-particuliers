@@ -34,8 +34,8 @@
 <script setup>
 defineProps({
   showProgress: { type: Boolean, default: false },
-  progress:     { type: Number,  default: 0 },
-  section:      { type: String,  default: '' },
+  progress: { type: Number, default: 0 },
+  section: { type: String, default: '' },
 })
 
 const logoSrc = `${import.meta.env.BASE_URL}images/logo-cptm.png`

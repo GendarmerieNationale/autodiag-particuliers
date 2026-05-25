@@ -1,8 +1,8 @@
 export const sectionIconMap = {
-  'Extérieurs': 'ri-landscape-line',
+  Extérieurs: 'ri-landscape-line',
   'Façades & Intérieur': 'ri-door-open-line',
   'Votre Quotidien': 'ri-calendar-check-line',
-  'Immeuble': 'ri-building-2-line',
+  Immeuble: 'ri-building-2-line',
   "Accès à l'immeuble": 'ri-key-line',
   'Votre Logement': 'ri-home-heart-line',
 }

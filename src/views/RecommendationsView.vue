@@ -7,7 +7,9 @@
         <div class="reco-header__icon"><i class="ri-book-open-line"></i></div>
         <div>
           <h1 class="reco-header__title">Préconisations générales</h1>
-          <p class="reco-header__sub">Conseils pratiques de la Gendarmerie Nationale pour sécuriser votre habitation</p>
+          <p class="reco-header__sub">
+            Conseils pratiques de la Gendarmerie Nationale pour sécuriser votre habitation
+          </p>
         </div>
       </div>
 
@@ -21,7 +23,12 @@
             <li v-for="(item, i) in section.contenu" :key="i">
               <i class="ri-arrow-right-s-line"></i>
               <span v-if="isLink(item)">
-                <a :href="extractLink(item)" target="_blank" rel="noopener noreferrer" class="fr-link">
+                <a
+                  :href="extractLink(item)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="fr-link"
+                >
                   {{ stripLink(item) }}
                 </a>
               </span>
@@ -37,15 +44,13 @@
           <span class="reco-otv-banner__icon"><i class="ri-police-car-line"></i></span>
           <div>
             <p class="reco-otv-banner__title">Opération Tranquillité Vacances (OTV)</p>
-            <p class="reco-otv-banner__desc">Inscrivez-vous gratuitement auprès de votre brigade de gendarmerie pour que des patrouilles surveillent votre domicile pendant vos absences.</p>
+            <p class="reco-otv-banner__desc">
+              Inscrivez-vous gratuitement auprès de votre brigade de gendarmerie pour que des
+              patrouilles surveillent votre domicile pendant vos absences.
+            </p>
           </div>
         </div>
-        <a
-          href="https://www.masecurite.interieur.gouv.fr/fr/demarches-en-ligne/operation-tranquillite-vacances?hl=OTV"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="reco-otv-banner__btn"
-        >
+        <a :href="OTV_URL" target="_blank" rel="noopener noreferrer" class="reco-otv-banner__btn">
           <i class="ri-external-link-line"></i>
           Accéder à MaSécurité
         </a>
@@ -56,11 +61,13 @@
           label="Retour aux résultats"
           icon="ri-arrow-left-line"
           :secondary="true"
+          class="reco-action-btn"
           @click="$router.push('/resultat')"
         />
         <DsfrButton
           label="Nouveau diagnostic"
           icon="ri-restart-line"
+          class="reco-action-btn"
           @click="restart"
         />
       </div>
@@ -73,6 +80,7 @@ import { useRouter } from 'vue-router'
 import { useQuestionnaire } from '@/composables/useQuestionnaire.js'
 import AppHeader from '@/components/AppHeader.vue'
 import recommendations from '@/data/recommendations.json'
+import { OTV_URL } from '@/config/links.js'
 
 const router = useRouter()
 const { reset } = useQuestionnaire()
@@ -99,7 +107,7 @@ function restart() {
 <style scoped>
 .reco-page {
   min-height: 100vh;
-  background: #f5f5fe;
+  background: var(--c-bg-app);
 }
 
 .reco-main {
@@ -119,7 +127,7 @@ function restart() {
   width: 56px;
   height: 56px;
   border-radius: 14px;
-  background: #000091;
+  background: var(--c-brand);
   color: #fff;
   display: flex;
   align-items: center;
@@ -131,7 +139,7 @@ function restart() {
 .reco-header__title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #161616;
+  color: var(--c-text-title);
   margin: 0 0 0.25rem 0;
 }
 
@@ -151,7 +159,7 @@ function restart() {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 16px rgba(0,0,144,0.08);
+  box-shadow: 0 2px 16px rgba(0, 0, 144, 0.08);
 }
 
 .reco-card__header {
@@ -159,7 +167,7 @@ function restart() {
   align-items: center;
   gap: 0.875rem;
   padding: 1rem 1.5rem;
-  background: linear-gradient(90deg, #f0f0ff, #fff);
+  background: linear-gradient(90deg, var(--c-bg-card-blue), #fff);
   border-bottom: 1px solid #e0e0f0;
 }
 
@@ -167,7 +175,7 @@ function restart() {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: #000091;
+  background: var(--c-brand);
   color: #fff;
   display: flex;
   align-items: center;
@@ -179,7 +187,7 @@ function restart() {
 .reco-card__title {
   font-size: 1rem;
   font-weight: 700;
-  color: #161616;
+  color: var(--c-text-title);
   margin: 0;
 }
 
@@ -202,7 +210,7 @@ function restart() {
 }
 
 .reco-card__list li i {
-  color: #000091;
+  color: var(--c-brand);
   flex-shrink: 0;
   margin-top: 0.2rem;
   font-size: 1rem;
@@ -210,7 +218,7 @@ function restart() {
 
 /* OTV Banner */
 .reco-otv-banner {
-  background: linear-gradient(135deg, #16166a, #000091);
+  background: linear-gradient(135deg, #16166a, var(--c-brand));
   border-radius: 12px;
   padding: 1.5rem;
   display: flex;
@@ -253,7 +261,7 @@ function restart() {
   align-items: center;
   gap: 0.4rem;
   background: #fff;
-  color: #000091;
+  color: var(--c-brand);
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.6rem 1.25rem;
@@ -261,21 +269,36 @@ function restart() {
   text-decoration: none;
   white-space: nowrap;
   transition: background 0.2s;
+  margin-left: auto;
 }
 
 .reco-otv-banner__btn:hover {
-  background: #f0f0ff;
+  background: var(--c-bg-card-blue);
 }
 
 .reco-actions {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.reco-action-btn {
+  justify-content: center;
 }
 
 @media (max-width: 480px) {
   .reco-otv-banner {
     flex-direction: column;
+  }
+  .reco-otv-banner__btn {
+    margin-left: 0;
+  }
+  .reco-actions {
+    flex-direction: column;
+  }
+  .reco-action-btn {
+    width: 100%;
   }
 }
 </style>

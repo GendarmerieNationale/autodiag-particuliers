@@ -3,35 +3,29 @@
     <AppHeader />
 
     <main id="main-content" class="recap-main">
-
       <!-- Header -->
       <div class="recap-hero">
         <div class="recap-hero__icon"><i class="ri-list-check-3"></i></div>
         <h1 class="recap-hero__title">Récapitulatif de vos réponses</h1>
         <p class="recap-hero__sub">
-          Vérifiez vos réponses avant de consulter votre résultat.
-          Modifiez une section si vous avez fait une erreur.
+          Vérifiez vos réponses avant de consulter votre résultat. Modifiez une section si vous avez
+          fait une erreur.
         </p>
       </div>
 
       <!-- Sections -->
       <div class="recap-sections">
-        <div
-          v-for="section in sections"
-          :key="section.name"
-          class="recap-section"
-        >
+        <div v-for="section in sections" :key="section.name" class="recap-section">
           <!-- Section header -->
           <div class="recap-section__head">
             <div class="recap-section__title-row">
-              <i :class="sectionIconMap[section.name] || 'ri-folder-open-line'" aria-hidden="true"></i>
+              <i
+                :class="sectionIconMap[section.name] || 'ri-folder-open-line'"
+                aria-hidden="true"
+              ></i>
               <h2>{{ section.name }}</h2>
             </div>
-            <button
-              type="button"
-              class="recap-edit-btn"
-              @click="editSection(section.name)"
-            >
+            <button type="button" class="recap-edit-btn" @click="editSection(section.name)">
               <i class="ri-pencil-line" aria-hidden="true"></i>
               Modifier
             </button>
@@ -39,16 +33,9 @@
 
           <!-- Questions list -->
           <ul class="recap-q-list">
-            <li
-              v-for="q in section.questions"
-              :key="q.id"
-              class="recap-q-item"
-            >
+            <li v-for="q in section.questions" :key="q.id" class="recap-q-item">
               <span class="recap-q-text">{{ q.text }}</span>
-              <span
-                class="recap-q-chip"
-                :class="`recap-q-chip--${state.answers[q.id]?.value}`"
-              >
+              <span class="recap-q-chip" :class="`recap-q-chip--${state.answers[q.id]?.value}`">
                 {{ answerLabel(state.answers[q.id]?.value) }}
               </span>
             </li>
@@ -61,17 +48,17 @@
         <DsfrButton
           label="Voir mes résultats"
           icon="ri-bar-chart-2-line"
-          :icon-right="true"
           size="lg"
           class="recap-cta__btn"
           @click="goToResults"
         />
         <p class="recap-cta__note">
           <i class="ri-shield-check-line" aria-hidden="true"></i>
-          {{ totalAnswered }} réponse{{ totalAnswered !== 1 ? 's' : '' }} enregistrée{{ totalAnswered !== 1 ? 's' : '' }}
+          {{ totalAnswered }} réponse{{ totalAnswered !== 1 ? 's' : '' }} enregistrée{{
+            totalAnswered !== 1 ? 's' : ''
+          }}
         </p>
       </div>
-
     </main>
   </div>
 </template>
@@ -117,7 +104,7 @@ function goToResults() {
 <style scoped>
 .recap-page {
   min-height: 100vh;
-  background: #f5f5fe;
+  background: var(--c-bg-app);
 }
 
 .recap-main {
@@ -135,7 +122,7 @@ function goToResults() {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: #000091;
+  background: var(--c-brand);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,7 +133,7 @@ function goToResults() {
 .recap-hero__title {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #161616;
+  color: var(--c-text-title);
   margin: 0 0 0.5rem;
 }
 .recap-hero__sub {
@@ -188,13 +175,13 @@ function goToResults() {
 }
 .recap-section__title-row i {
   font-size: 1.2rem;
-  color: #000091;
+  color: var(--c-brand);
   flex-shrink: 0;
 }
 .recap-section__title-row h2 {
   font-size: 1rem;
   font-weight: 700;
-  color: #161616;
+  color: var(--c-text-title);
   margin: 0;
 }
 
@@ -204,9 +191,9 @@ function goToResults() {
   gap: 0.35rem;
   padding: 0.35rem 0.85rem;
   border-radius: 6px;
-  border: 1.5px solid #000091;
+  border: 1.5px solid var(--c-brand);
   background: transparent;
-  color: #000091;
+  color: var(--c-brand);
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
@@ -214,10 +201,12 @@ function goToResults() {
   white-space: nowrap;
   flex-shrink: 0;
 }
-.recap-edit-btn i { font-size: 0.9rem; }
+.recap-edit-btn i {
+  font-size: 0.9rem;
+}
 .recap-edit-btn:hover,
 .recap-edit-btn:focus-visible {
-  background: #000091;
+  background: var(--c-brand);
   color: #fff;
   outline: none;
 }
@@ -238,7 +227,9 @@ function goToResults() {
   border-bottom: 1px solid #f4f4f8;
   font-size: 0.875rem;
 }
-.recap-q-item:last-child { border-bottom: none; }
+.recap-q-item:last-child {
+  border-bottom: none;
+}
 
 .recap-q-text {
   flex: 1;
@@ -254,9 +245,18 @@ function goToResults() {
   border-radius: 10px;
   white-space: nowrap;
 }
-.recap-q-chip--oui      { background: #e8f5e9; color: #1a5c33; }
-.recap-q-chip--non      { background: #fce9e9; color: #8d0000; }
-.recap-q-chip--sais_pas { background: #ededfd; color: #000091; }
+.recap-q-chip--oui {
+  background: var(--c-level-excellent-bg);
+  color: var(--c-level-excellent-dark);
+}
+.recap-q-chip--non {
+  background: var(--c-level-faible-bg);
+  color: var(--c-level-faible-dark);
+}
+.recap-q-chip--sais_pas {
+  background: var(--c-neutral-bg);
+  color: var(--c-brand);
+}
 
 /* ── CTA ──────────────────────────────────────── */
 .recap-cta {
@@ -267,6 +267,7 @@ function goToResults() {
   padding-top: 0.5rem;
 }
 .recap-cta__btn {
+  justify-content: center;
   min-width: 260px;
 }
 .recap-cta__note {
@@ -277,12 +278,21 @@ function goToResults() {
   color: #666;
   margin: 0;
 }
-.recap-cta__note i { color: #1f8d49; }
+.recap-cta__note i {
+  color: var(--c-level-excellent);
+}
 
 /* ── Responsive ───────────────────────────────── */
 @media (max-width: 520px) {
-  .recap-section__head { flex-wrap: wrap; }
-  .recap-cta__btn { width: 100%; min-width: unset; }
-  .recap-q-item { font-size: 0.82rem; }
+  .recap-section__head {
+    flex-wrap: wrap;
+  }
+  .recap-cta__btn {
+    min-width: unset;
+    max-width: 100%;
+  }
+  .recap-q-item {
+    font-size: 0.82rem;
+  }
 }
 </style>

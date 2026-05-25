@@ -1,6 +1,5 @@
 <template>
   <div class="home-page">
-
     <!-- ===== HERO ===== -->
     <div class="hero">
       <div class="hero__shape hero__shape--1" aria-hidden="true"></div>
@@ -32,16 +31,15 @@
     <!-- ===== MAIN ===== -->
     <main id="main-content" class="home-main">
       <div class="home-content fr-container">
-
         <!-- Intro card -->
         <div class="intro-card">
           <div class="intro-card__body">
             <div class="intro-card__text-col">
               <h2 class="intro-card__title">Évaluez la sûreté de votre habitation</h2>
               <p class="intro-card__text">
-                Ce questionnaire, proposé par la <strong>Gendarmerie Nationale</strong>,
-                vous permet d'identifier les points forts et les axes d'amélioration de la sécurité
-                de votre domicile à travers un auto-diagnostic guidé et confidentiel.
+                Ce questionnaire, proposé par la <strong>Gendarmerie Nationale</strong>, vous permet
+                d'identifier les points forts et les axes d'amélioration de la sécurité de votre
+                domicile à travers un auto-diagnostic guidé et confidentiel.
               </p>
             </div>
             <div class="intro-card__video-col">
@@ -89,8 +87,8 @@
         <div class="notice" role="note">
           <i class="ri-shield-check-line" aria-hidden="true"></i>
           <p>
-            Ce questionnaire est confidentiel. Vos réponses restent uniquement sur votre appareil
-            et ne sont transmises à aucun organisme.
+            Ce questionnaire est confidentiel. Vos réponses restent uniquement sur votre appareil et
+            ne sont transmises à aucun organisme.
           </p>
         </div>
 
@@ -108,21 +106,17 @@
 
         <p class="legal">
           Initiative de la Gendarmerie Nationale · Dispositif
-          <a
-            href="https://www.masecurite.interieur.gouv.fr/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="fr-link"
-          >MaSécurité</a>
+          <a :href="MASECURITE_HOME" target="_blank" rel="noopener noreferrer" class="fr-link"
+            >MaSécurité</a
+          >
         </p>
-
       </div>
     </main>
-
   </div>
 </template>
 
 <script setup>
+import { MASECURITE_HOME } from '@/config/links.js'
 const BASE = import.meta.env.BASE_URL
 </script>
 
@@ -137,7 +131,7 @@ const BASE = import.meta.env.BASE_URL
 
 /* ─── Hero ───────────────────────────────────────────────────── */
 .hero {
-  background: linear-gradient(145deg, #0b0b52 0%, #000091 55%, #1616a0 100%);
+  background: linear-gradient(145deg, var(--c-brand-darker) 0%, var(--c-brand) 55%, #1616a0 100%);
   padding: 3.5rem 0 3rem;
   position: relative;
   overflow: hidden;
@@ -150,8 +144,18 @@ const BASE = import.meta.env.BASE_URL
   opacity: 0.05;
   pointer-events: none;
 }
-.hero__shape--1 { width: 420px; height: 420px; top: -140px; right: -60px; }
-.hero__shape--2 { width: 260px; height: 260px; bottom: -80px; left: 3%; }
+.hero__shape--1 {
+  width: 420px;
+  height: 420px;
+  top: -140px;
+  right: -60px;
+}
+.hero__shape--2 {
+  width: 260px;
+  height: 260px;
+  bottom: -80px;
+  left: 3%;
+}
 
 .hero__content {
   position: relative;
@@ -168,7 +172,9 @@ const BASE = import.meta.env.BASE_URL
   filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.45));
 }
 
-.hero__titles { color: #fff; }
+.hero__titles {
+  color: #fff;
+}
 
 .hero__supra {
   margin: 0 0 0.3rem;
@@ -187,7 +193,9 @@ const BASE = import.meta.env.BASE_URL
   color: #fff;
 }
 
-.hero__accent { color: #ffd700; }
+.hero__accent {
+  color: #ffd700;
+}
 
 .hero__cptm {
   margin: 0;
@@ -202,9 +210,18 @@ const BASE = import.meta.env.BASE_URL
   height: 5px;
   width: 100%;
 }
-.tricolor__blue  { flex: 1; background: #002395; }
-.tricolor__white { flex: 1; background: #ffffff; }
-.tricolor__red   { flex: 1; background: #ed2939; }
+.tricolor__blue {
+  flex: 1;
+  background: #002395;
+}
+.tricolor__white {
+  flex: 1;
+  background: #ffffff;
+}
+.tricolor__red {
+  flex: 1;
+  background: #ed2939;
+}
 
 /* ─── Main ───────────────────────────────────────────────────── */
 .home-main {
@@ -225,7 +242,7 @@ const BASE = import.meta.env.BASE_URL
   background: #fff;
   border-radius: 12px;
   padding: 1.75rem 2rem;
-  border-top: 4px solid #000091;
+  border-top: 4px solid var(--c-brand);
   box-shadow: 0 2px 18px rgba(0, 0, 144, 0.08);
 }
 
@@ -250,18 +267,22 @@ const BASE = import.meta.env.BASE_URL
   object-fit: cover;
   border-radius: 10px;
   display: block;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .intro-video { display: none; }
-  .intro-card__video-col { display: none; }
+  .intro-video {
+    display: none;
+  }
+  .intro-card__video-col {
+    display: none;
+  }
 }
 
 .intro-card__title {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #161616;
+  color: var(--c-text-title);
   margin: 0 0 0.75rem;
 }
 
@@ -287,12 +308,12 @@ const BASE = import.meta.env.BASE_URL
   align-items: center;
   gap: 0.75rem;
   box-shadow: 0 2px 10px rgba(0, 0, 144, 0.06);
-  border-bottom: 3px solid #f0f0ff;
+  border-bottom: 3px solid var(--c-bg-card-blue);
 }
 
 .metric-item i {
   font-size: 1.5rem;
-  color: #000091;
+  color: var(--c-brand);
   flex-shrink: 0;
 }
 
@@ -304,7 +325,7 @@ const BASE = import.meta.env.BASE_URL
 
 .metric-item strong {
   font-size: 0.85rem;
-  color: #161616;
+  color: var(--c-text-title);
   font-weight: 700;
 }
 
@@ -320,10 +341,10 @@ const BASE = import.meta.env.BASE_URL
   align-items: flex-start;
   gap: 0.75rem;
   background: #e3f4e7;
-  border-left: 4px solid #1f8d49;
+  border-left: 4px solid var(--c-level-excellent);
   border-radius: 0 8px 8px 0;
   padding: 1rem 1.25rem;
-  color: #1a5c33;
+  color: var(--c-level-excellent-dark);
   font-size: 0.875rem;
   line-height: 1.65;
 }
@@ -334,7 +355,9 @@ const BASE = import.meta.env.BASE_URL
   margin-top: 0.05rem;
 }
 
-.notice p { margin: 0; }
+.notice p {
+  margin: 0;
+}
 
 /* ─── CTA ────────────────────────────────────────────────────── */
 .cta-wrap {

@@ -4,9 +4,13 @@
 
     <main id="main-content" class="fr-container type-main">
       <div class="type-card">
-        <p class="type-card__step fr-badge fr-badge--info fr-badge--no-icon">Étape 1 sur 2 · Localisation</p>
+        <p class="type-card__step fr-badge fr-badge--info fr-badge--no-icon">
+          Étape 1 sur 2 · Localisation
+        </p>
         <h2 class="fr-h2 type-card__title">Quel type de logement avez-vous ?</h2>
-        <p class="fr-text--lg type-card__desc">Sélectionnez votre situation pour commencer le questionnaire adapté.</p>
+        <p class="fr-text--lg type-card__desc">
+          Sélectionnez votre situation pour commencer le questionnaire adapté.
+        </p>
 
         <!-- Logement type — rich card choices -->
         <div class="type-choices">
@@ -26,7 +30,6 @@
 
         <Transition name="slide-up">
           <div v-if="selectedType" class="type-localisation">
-
             <!-- Localisation — icon card choices -->
             <p class="type-loc__legend">Situation géographique</p>
             <div class="type-choices type-choices--loc">
@@ -101,21 +104,31 @@ import AppHeader from '@/components/AppHeader.vue'
 const router = useRouter()
 const { setLogementType, setLocalisation, answer } = useQuestionnaire()
 
-const selectedType         = ref(null)
+const selectedType = ref(null)
 const selectedLocalisation = ref(null)
-const eclairage            = ref(null)
-const videoprotection      = ref(null)
+const eclairage = ref(null)
+const videoprotection = ref(null)
 
 const logementOptions = [
-  { value: 'maison',      label: 'Maison individuelle', icon: 'ri-home-2-line',     desc: 'Maison avec ou sans jardin' },
-  { value: 'appartement', label: 'Appartement',         icon: 'ri-building-2-line', desc: 'En immeuble collectif' },
+  {
+    value: 'maison',
+    label: 'Maison individuelle',
+    icon: 'ri-home-2-line',
+    desc: 'Maison avec ou sans jardin',
+  },
+  {
+    value: 'appartement',
+    label: 'Appartement',
+    icon: 'ri-building-2-line',
+    desc: 'En immeuble collectif',
+  },
 ]
 
 const localisationOptions = [
-  { value: 'ville',          label: 'Ville',          icon: 'ri-building-4-line' },
-  { value: 'petite_commune', label: 'Petite commune',  icon: 'ri-community-line'  },
-  { value: 'campagne',       label: 'Campagne',        icon: 'ri-tree-line'       },
-  { value: 'lotissement',    label: 'Lotissement',     icon: 'ri-layout-grid-line'},
+  { value: 'ville', label: 'Ville', icon: 'ri-building-4-line' },
+  { value: 'petite_commune', label: 'Petite commune', icon: 'ri-community-line' },
+  { value: 'campagne', label: 'Campagne', icon: 'ri-tree-line' },
+  { value: 'lotissement', label: 'Lotissement', icon: 'ri-layout-grid-line' },
 ]
 
 const ouiNonOptions = [
@@ -123,8 +136,8 @@ const ouiNonOptions = [
   { value: 'non', label: 'Non' },
 ]
 
-const canContinue = computed(() =>
-  selectedLocalisation.value && eclairage.value && videoprotection.value
+const canContinue = computed(
+  () => selectedLocalisation.value && eclairage.value && videoprotection.value
 )
 
 function select(type) {
@@ -134,8 +147,18 @@ function select(type) {
 function continuer() {
   setLogementType(selectedType.value)
   setLocalisation(selectedLocalisation.value)
-  answer('type_eclairage',      eclairage.value,      eclairage.value      === 'oui' ? 1 : 0, `Éclairage public : ${eclairage.value}`)
-  answer('type_videoprotection', videoprotection.value, videoprotection.value === 'oui' ? 1 : 0, `Vidéo-protection : ${videoprotection.value}`)
+  answer(
+    'type_eclairage',
+    eclairage.value,
+    eclairage.value === 'oui' ? 1 : 0,
+    `Éclairage public : ${eclairage.value}`
+  )
+  answer(
+    'type_videoprotection',
+    videoprotection.value,
+    videoprotection.value === 'oui' ? 1 : 0,
+    `Vidéo-protection : ${videoprotection.value}`
+  )
   router.push('/questionnaire')
 }
 </script>
@@ -240,13 +263,17 @@ function continuer() {
 
 .type-choices--loc {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-bottom: 1.5rem;
+}
+
+.type-choices--loc .type-choice {
+  min-width: 0;
 }
 
 @media (max-width: 480px) {
   .type-choices--loc {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

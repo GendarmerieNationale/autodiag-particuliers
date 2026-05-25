@@ -2,6 +2,11 @@
   <div class="q-page">
     <AppHeader :show-progress="true" :progress="overallProgressPct" :section="currentSectionName" />
 
+    <!-- ===== Screen-reader announcement of section transitions ===== -->
+    <div class="fr-sr-only" role="status" aria-live="polite" aria-atomic="true">
+      {{ liveAnnouncement }}
+    </div>
+
     <!-- ===== Section transition overlay ===== -->
     <Transition name="overlay-fade">
       <div v-if="showOverlay" class="section-overlay">
@@ -20,7 +25,6 @@
     </Transition>
 
     <main id="main-content" class="q-main">
-
       <!-- ===== Section stepper ===== -->
       <div class="q-stepper" role="navigation" aria-label="Étapes du questionnaire">
         <div
@@ -43,14 +47,21 @@
       <!-- ===== Score chip ===== -->
       <div class="q-score">
         <i class="ri-star-fill"></i>
-        <span><strong>{{ currentScore }}</strong> / {{ maxPossible }} points</span>
+        <span
+          ><strong>{{ currentScore }}</strong> / {{ maxPossible }} points</span
+        >
       </div>
 
       <!-- ===== Section heading ===== -->
       <div class="q-section-head">
-        <i :class="sectionIconMap[currentSectionName] || 'ri-folder-open-line'" aria-hidden="true"></i>
+        <i
+          :class="sectionIconMap[currentSectionName] || 'ri-folder-open-line'"
+          aria-hidden="true"
+        ></i>
         <h2>{{ currentSectionName }}</h2>
-        <span class="q-section-head__count">{{ currentSectionIdx + 1 }} / {{ sectionNames.length }}</span>
+        <span class="q-section-head__count"
+          >{{ currentSectionIdx + 1 }} / {{ sectionNames.length }}</span
+        >
       </div>
 
       <!-- ===== Questions list ===== -->
@@ -58,8 +69,8 @@
         <TransitionGroup name="q-appear">
           <div
             v-for="q in visibleQuestions"
-            :key="q.id"
             :id="`q-${q.id}`"
+            :key="q.id"
             class="q-card"
             :class="{
               'q-card--done': !!answers[q.id],
@@ -70,17 +81,14 @@
             <div v-if="answers[q.id]" class="q-done-row">
               <i class="ri-checkbox-circle-fill q-done-row__check" aria-hidden="true"></i>
               <span class="q-done-row__text">{{ q.text }}</span>
-              <span
-                class="q-done-row__ans"
-                :class="`q-done-row__ans--${answers[q.id].value}`"
-              >
+              <span class="q-done-row__ans" :class="`q-done-row__ans--${answers[q.id].value}`">
                 {{ answerLabel(answers[q.id].value) }}
               </span>
               <button
                 type="button"
                 class="q-done-row__edit"
-                @click="editAnswer(q)"
                 :aria-label="`Modifier la réponse : ${q.text}`"
+                @click="editAnswer(q)"
               >
                 <i class="ri-pencil-line" aria-hidden="true"></i>
               </button>
@@ -101,19 +109,11 @@
                 role="group"
                 :aria-label="`Répondre à : ${q.text}`"
               >
-                <button
-                  type="button"
-                  class="q-btn q-btn--yes"
-                  @click="selectAnswer(q, 'oui')"
-                >
+                <button type="button" class="q-btn q-btn--yes" @click="selectAnswer(q, 'oui')">
                   <i class="ri-checkbox-circle-line" aria-hidden="true"></i>
                   Oui
                 </button>
-                <button
-                  type="button"
-                  class="q-btn q-btn--no"
-                  @click="selectAnswer(q, 'non')"
-                >
+                <button type="button" class="q-btn q-btn--no" @click="selectAnswer(q, 'non')">
                   <i class="ri-close-circle-line" aria-hidden="true"></i>
                   Non
                 </button>
@@ -152,7 +152,6 @@
           </div>
         </div>
       </Transition>
-
     </main>
   </div>
 </template>
@@ -163,17 +162,30 @@ import { useRouter, useRoute } from 'vue-router'
 import { useQuestionnaire } from '@/composables/useQuestionnaire.js'
 import AppHeader from '@/components/AppHeader.vue'
 import { sectionIconMap, answerLabel } from '@/data/sections.js'
+import { SECTION_OVERLAY_MS } from '@/config/ui.js'
 
 const router = useRouter()
 const route = useRoute()
-const { state, answer, unAnswer, completeSection, setTotalPossible, finishQuestionnaire, unfinish, score, allQuestions } = useQuestionnaire()
+const {
+  state,
+  answer,
+  unAnswer,
+  completeSection,
+  finishQuestionnaire,
+  unfinish,
+  score,
+  totalPossible,
+  allQuestions,
+} = useQuestionnaire()
 
 // ──────────────────────────────────────────────
 // Data helpers
 // ──────────────────────────────────────────────
 const questionById = computed(() => {
   const m = {}
-  allQuestions.value.forEach(q => { m[q.id] = q })
+  allQuestions.value.forEach(q => {
+    m[q.id] = q
+  })
   return m
 })
 
@@ -191,7 +203,8 @@ const sectionNames = computed(() => {
 const currentSectionIdx = ref(0)
 const visibleQuestions = ref([])
 const sectionDone = ref(false)
-const isFinishing = ref(false)
+// null while the section is in progress OR when the questionnaire is finishing;
+// holds the id of the first question of the next section otherwise.
 const nextSectionFirstId = ref(null)
 const completedSections = ref([])
 
@@ -201,13 +214,16 @@ const completedSectionName = ref('')
 const sectionPoints = ref(0)
 const lastSectionScore = ref(0)
 
+// Live region — updated on section completion, picked up by screen readers
+const liveAnnouncement = ref('')
+
 // ──────────────────────────────────────────────
 // Computed
 // ──────────────────────────────────────────────
 const currentSectionName = computed(() => sectionNames.value[currentSectionIdx.value] || '')
 const isLastSection = computed(() => currentSectionIdx.value === sectionNames.value.length - 1)
 const currentScore = computed(() => score.value)
-const maxPossible = computed(() => state.totalPossible)
+const maxPossible = computed(() => totalPossible.value)
 const answers = computed(() => state.answers)
 
 const overallProgressPct = computed(() => {
@@ -226,7 +242,6 @@ onMounted(() => {
     router.replace('/type')
     return
   }
-  setTotalPossible(allQuestions.value.length + 2)
 
   const editSection = route.query.editSection
   if (editSection) {
@@ -253,7 +268,6 @@ onMounted(() => {
 
 function initSection(firstId) {
   sectionDone.value = false
-  isFinishing.value = false
   nextSectionFirstId.value = null
   const q = questionById.value[firstId]
   visibleQuestions.value = q ? [q] : []
@@ -271,17 +285,15 @@ function selectAnswer(q, key) {
 
   const nextId = opt.nextId
 
-  // End of entire questionnaire
+  // End of entire questionnaire — nextSectionFirstId stays null to signal finish.
   if (q.isLast || nextId === null) {
     sectionDone.value = true
-    isFinishing.value = true
     return
   }
 
   const nextQ = questionById.value[nextId]
   if (!nextQ) {
     sectionDone.value = true
-    isFinishing.value = true
     return
   }
 
@@ -315,7 +327,6 @@ function editAnswer(q) {
 
   // Reset section state
   sectionDone.value = false
-  isFinishing.value = false
   nextSectionFirstId.value = null
 
   nextTick(() => {
@@ -334,19 +345,21 @@ function goNext() {
   completeSection(currentSectionName.value)
   completedSections.value = [...completedSections.value, currentSectionName.value]
 
+  liveAnnouncement.value = `Section ${currentSectionName.value} complétée. ${sectionPoints.value} point${sectionPoints.value !== 1 ? 's' : ''} obtenu${sectionPoints.value !== 1 ? 's' : ''}.`
+
   showOverlay.value = true
 
   setTimeout(() => {
     showOverlay.value = false
 
-    if (isFinishing.value) {
+    if (nextSectionFirstId.value === null) {
       finishQuestionnaire()
       router.push('/recapitulatif')
     } else {
       currentSectionIdx.value++
       initSection(nextSectionFirstId.value)
     }
-  }, 1000)
+  }, SECTION_OVERLAY_MS)
 }
 </script>
 
@@ -354,7 +367,7 @@ function goNext() {
 /* ── Page shell ───────────────────────────────── */
 .q-page {
   min-height: 100vh;
-  background: #f5f5fe;
+  background: var(--c-bg-app);
 }
 
 .q-main {
@@ -391,9 +404,13 @@ function goNext() {
   height: 2px;
   background: #d0d0e0;
 }
-.q-step:first-child::before { display: none; }
+.q-step:first-child::before {
+  display: none;
+}
 .q-step--done::before,
-.q-step--active::before { background: #000091; }
+.q-step--active::before {
+  background: var(--c-brand);
+}
 
 .q-step__dot {
   width: 28px;
@@ -412,14 +429,14 @@ function goNext() {
   flex-shrink: 0;
 }
 .q-step--done .q-step__dot {
-  background: #000091;
-  border-color: #000091;
+  background: var(--c-brand);
+  border-color: var(--c-brand);
   color: #fff;
 }
 .q-step--active .q-step__dot {
-  border-color: #000091;
-  background: #f0f0ff;
-  color: #000091;
+  border-color: var(--c-brand);
+  background: var(--c-bg-card-blue);
+  color: var(--c-brand);
   box-shadow: 0 0 0 4px rgba(0, 0, 144, 0.12);
 }
 
@@ -431,7 +448,7 @@ function goNext() {
 }
 .q-step--done .q-step__label,
 .q-step--active .q-step__label {
-  color: #000091;
+  color: var(--c-brand);
   font-weight: 600;
 }
 
@@ -448,7 +465,10 @@ function goNext() {
   color: #444;
   margin-bottom: 1.5rem;
 }
-.q-score i { color: #ffd700; font-size: 1rem; }
+.q-score i {
+  color: #ffd700;
+  font-size: 1rem;
+}
 
 /* ── Section heading ──────────────────────────── */
 .q-section-head {
@@ -489,11 +509,11 @@ function goNext() {
   transition: box-shadow 0.2s;
 }
 .q-card--done {
-  border-left: 3px solid #1f8d49;
+  border-left: 3px solid var(--c-level-excellent);
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 .q-card--active {
-  border-left: 3px solid #000091;
+  border-left: 3px solid var(--c-brand);
   box-shadow: 0 4px 20px rgba(0, 0, 144, 0.11);
 }
 
@@ -506,7 +526,7 @@ function goNext() {
 }
 .q-done-row__check {
   font-size: 1.1rem;
-  color: #1f8d49;
+  color: var(--c-level-excellent);
   flex-shrink: 0;
 }
 .q-done-row__text {
@@ -522,9 +542,18 @@ function goNext() {
   border-radius: 10px;
   white-space: nowrap;
 }
-.q-done-row__ans--oui     { background: #e8f5e9; color: #1a5c33; }
-.q-done-row__ans--non     { background: #fce9e9; color: #8d0000; }
-.q-done-row__ans--sais_pas { background: #ededfd; color: #000091; }
+.q-done-row__ans--oui {
+  background: var(--c-level-excellent-bg);
+  color: var(--c-level-excellent-dark);
+}
+.q-done-row__ans--non {
+  background: var(--c-level-faible-bg);
+  color: var(--c-level-faible-dark);
+}
+.q-done-row__ans--sais_pas {
+  background: var(--c-neutral-bg);
+  color: var(--c-brand);
+}
 
 .q-done-row__edit {
   flex-shrink: 0;
@@ -544,9 +573,9 @@ function goNext() {
 }
 .q-done-row__edit:hover,
 .q-done-row__edit:focus-visible {
-  border-color: #000091;
-  background: #f0f0ff;
-  color: #000091;
+  border-color: var(--c-brand);
+  background: var(--c-bg-card-blue);
+  color: var(--c-brand);
   outline: none;
 }
 
@@ -557,13 +586,13 @@ function goNext() {
 .q-active-inner__text {
   font-size: 1.05rem;
   font-weight: 600;
-  color: #161616;
+  color: var(--c-text-title);
   margin: 0 0 1rem;
   line-height: 1.55;
 }
 .q-active-inner__info {
   background: #e8f0fb;
-  border-left: 3px solid #000091;
+  border-left: 3px solid var(--c-brand);
   border-radius: 0 8px 8px 0;
   padding: 0.75rem 1rem;
   display: flex;
@@ -573,8 +602,13 @@ function goNext() {
   color: #1e2587;
   line-height: 1.6;
 }
-.q-active-inner__info i { flex-shrink: 0; margin-top: 0.1rem; }
-.q-active-inner__info p { margin: 0; }
+.q-active-inner__info i {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.q-active-inner__info p {
+  margin: 0;
+}
 
 /* Answer buttons */
 .q-btns {
@@ -601,27 +635,29 @@ function goNext() {
   color: #444;
   transition: all 0.15s ease;
 }
-.q-btn i { font-size: 1.15rem; }
+.q-btn i {
+  font-size: 1.15rem;
+}
 
 .q-btn--yes:hover,
 .q-btn--yes:focus-visible {
-  border-color: #1f8d49;
-  background: #e8f5e9;
-  color: #1a5c33;
+  border-color: var(--c-level-excellent);
+  background: var(--c-level-excellent-bg);
+  color: var(--c-level-excellent-dark);
   outline: none;
 }
 .q-btn--no:hover,
 .q-btn--no:focus-visible {
-  border-color: #ce0500;
-  background: #fce9e9;
-  color: #8d0000;
+  border-color: var(--c-level-faible);
+  background: var(--c-level-faible-bg);
+  color: var(--c-level-faible-dark);
   outline: none;
 }
 .q-btn--neutral:hover,
 .q-btn--neutral:focus-visible {
   border-color: #6a6af4;
-  background: #ededfd;
-  color: #000091;
+  background: var(--c-neutral-bg);
+  color: var(--c-brand);
   outline: none;
 }
 
@@ -641,7 +677,9 @@ function goNext() {
   justify-content: center;
   gap: 0.5rem;
 }
-.q-next__btn i { font-size: 1.1rem; }
+.q-next__btn i {
+  font-size: 1.1rem;
+}
 
 /* ── Completed section badges ────────────────── */
 .q-badges {
@@ -654,8 +692,8 @@ function goNext() {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  background: #e8f5e9;
-  color: #1a5c33;
+  background: var(--c-level-excellent-bg);
+  color: var(--c-level-excellent-dark);
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.25rem 0.6rem;
@@ -694,10 +732,19 @@ function goNext() {
   color: var(--text-inverted-grey);
   font-size: 2rem;
 }
-.section-overlay__title { font-weight: 700; font-size: 1.1rem; color: #1f8d49; margin: 0 0 0.25rem; }
-.section-overlay__name  { color: #555; font-size: 0.95rem; margin: 0 0 0.75rem; }
+.section-overlay__title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--c-level-excellent);
+  margin: 0 0 0.25rem;
+}
+.section-overlay__name {
+  color: #555;
+  font-size: 0.95rem;
+  margin: 0 0 0.75rem;
+}
 .section-overlay__pts {
-  background: #f5f5fe;
+  background: var(--c-bg-app);
   border-radius: 20px;
   padding: 0.5rem 1rem;
   display: inline-flex;
@@ -705,32 +752,63 @@ function goNext() {
   gap: 0.4rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #000091;
+  color: var(--c-brand);
 }
 
 /* ── Transitions ─────────────────────────────── */
-.q-appear-enter-active { transition: all 0.35s ease; }
-.q-appear-enter-from   { opacity: 0; transform: translateY(14px); }
+.q-appear-enter-active {
+  transition: all 0.35s ease;
+}
+.q-appear-enter-from {
+  opacity: 0;
+  transform: translateY(14px);
+}
 
-.q-appear-single-enter-active { transition: all 0.4s ease; }
-.q-appear-single-enter-from   { opacity: 0; transform: translateY(16px); }
+.q-appear-single-enter-active {
+  transition: all 0.4s ease;
+}
+.q-appear-single-enter-from {
+  opacity: 0;
+  transform: translateY(16px);
+}
 
 .overlay-fade-enter-active,
-.overlay-fade-leave-active { transition: opacity 0.3s ease; }
+.overlay-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
 .overlay-fade-enter-from,
-.overlay-fade-leave-to { opacity: 0; }
+.overlay-fade-leave-to {
+  opacity: 0;
+}
 
 @keyframes pop {
-  from { transform: scale(0.7); opacity: 0; }
-  to   { transform: scale(1);   opacity: 1; }
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* ── Responsive ──────────────────────────────── */
 @media (max-width: 520px) {
-  .q-step__label { font-size: 0.58rem; }
-  .q-btns        { grid-template-columns: 1fr 1fr; }
-  .q-btns--3     { grid-template-columns: 1fr; }
-  .q-active-inner { padding: 1.25rem; }
-  .q-next__btn   { min-width: unset; width: 100%; }
+  .q-step__label {
+    font-size: 0.58rem;
+  }
+  .q-btns {
+    grid-template-columns: 1fr 1fr;
+  }
+  .q-btns--3 {
+    grid-template-columns: 1fr;
+  }
+  .q-active-inner {
+    padding: 1.25rem;
+  }
+  .q-next__btn {
+    min-width: unset;
+    width: 100%;
+  }
 }
 </style>
