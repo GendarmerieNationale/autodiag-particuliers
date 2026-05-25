@@ -54,15 +54,16 @@ npm run dev
 ## Build & déploiement
 
 ```bash
-# Construire pour la production
+# Construire pour la production (sortie dans dist/)
 npm run build
 
-# Déployer sur GitHub Pages (branche gh-pages)
-npm run deploy
+# Prévisualiser le build localement
+npm run preview
 ```
 
-L'application est déployée à l'adresse :
-**https://GendarmerieNationale.github.io/Auto-diagnostic/**
+Le déploiement vers GitHub Pages est **automatisé** par le workflow [.github/workflows/deploy.yml](.github/workflows/deploy.yml) : à chaque push sur `main`, le job build l'application et publie `dist/` via l'environnement `github-pages`. Aucune branche `gh-pages` n'est utilisée.
+
+URL en production : **<https://gendarmerienationale.github.io/autodiag-particuliers/>**
 
 ---
 
